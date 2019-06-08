@@ -109,11 +109,59 @@ bindkey " " globalias
 bindkey "^ " magic-space           # control-space to bypass completion
 bindkey -M isearch " " magic-space # normal space during searches
 
-
-if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	source /usr/share/doc/pkgfile/command-not-found.zsh
+# Plugins
+if [ -f ~/.zsh/vi-mode.plugin.zsh ]; then
+    source ~/.zsh/vi-mode.plugin.zsh
 else
-	source /home/userfs/j/jehq500/Git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    echo "vi-mode plugin not loaded"
 fi
 
+if grep -Fxq "arch" /etc/os-release; then
+    if [ -f ~/.zsh/git.plugin.zsh ]; then
+        source ~/.zsh/git.plugin.zsh
+    else
+        echo "archlinux plugin not loaded"
+    fi
+fi
+
+if [ -f ~/.zsh/globalias.plugin.zsh ]; then
+    source ~/.zsh/globalias.plugin.zsh
+else
+    echo "globalias plugin not loaded"
+fi
+
+if [ -f ~/.zsh/git.plugin.zsh ]; then
+    source ~/.zsh/git.plugin.zsh
+else
+    echo "git plugin not loaded"
+fi
+
+if [ -f ~/.zsh/you-should-use.plugin.zsh ]; then
+    source ~/.zsh/you-should-use.plugin.zsh
+else
+    echo "you-should-use plugin not loaded"
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    echo "zsh-syntax-highlighting plugin not loaded"
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+    echo "zsh-autosuggestions plugin not loaded"
+fi
+
+if grep -Fxq "arch" /etc/os-release; then
+    if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then
+        source /usr/share/doc/pkgfile/command-not-found.zsh
+    else
+        echo "pkgfile plugin not loaded"
+    fi
+fi
