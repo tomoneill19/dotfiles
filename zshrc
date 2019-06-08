@@ -89,7 +89,6 @@ fi
 #Variables
 export VISUAL="nvim"
 export EDITOR="nvim"
-export HISTFILE="~/zfile"
 export GOPATH="~/.go"
 
 eval $(ssh-agent) > /dev/null
@@ -165,3 +164,9 @@ if grep -Fxq "arch" /etc/os-release; then
         echo "pkgfile plugin not loaded"
     fi
 fi
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000
+setopt SHARE_HISTORY
