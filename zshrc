@@ -57,6 +57,12 @@ reload-zshrc () {
 source ~/.zshrc
 }
 
+lls () {
+    clear
+    ls
+}
+
+
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     if [[ $BUFFER == sudo\ * ]]; then
