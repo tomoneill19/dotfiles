@@ -12,6 +12,7 @@ alias rm="rm -rfv"
 alias cp="cp -av --reflink=auto"
 alias mv="mv -v"
 alias du="du -sh"
+alias df="df -h"
 alias mkdir="mkdir -p"
 alias dirs="dirs -v"
 alias less="less -r"
@@ -26,10 +27,12 @@ alias reboot="sudo reboot"
 alias poweroff="sudo poweroff"
 alias shutdown="sudo poweroff"
 alias chrome="chromium"
-alias mkpkg="makepkg -i"
-alias explorer="nautilus"
+alias makepkg="makepkg -i"
+alias explorer="nautilus ."
 alias cl="clear"
 alias free="free -h"
+alias xclip="xclip -selection clipboard"
+
 
 if type exa > /dev/null
 then 
@@ -49,6 +52,11 @@ mkcdir () {
     mkdir -p -- "$1" &&
     cd -P -- "$1"
 }
+
+reload-zshrc () {
+source ~/.zshrc
+}
+
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     if [[ $BUFFER == sudo\ * ]]; then
