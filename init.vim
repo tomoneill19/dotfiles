@@ -529,6 +529,8 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"]
 "let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
+" ale gch usage (haskell syntax highlighting) 
+let g:ale_haskell_ghc_options = "-fno-code -v0 -dynamic"
 
 " Keybinds
 nnoremap <silent> <F3> :Autoformat<CR>
