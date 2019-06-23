@@ -529,12 +529,19 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"]
 "let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
-" ale gch usage (haskell syntax highlighting) 
+" Haskell syntax highlighting 
 let g:ale_haskell_ghc_options = "-fno-code -v0 -dynamic"
 
 " Keybinds
 nnoremap <silent> <F3> :Autoformat<CR>
 nnoremap <F4> :TagbarToggle<cr>
+
+" Spellcheck Language"
 set spelllang=en_gb
 
-au FileType tex setlocal spell
+augroup autoSpell
+    au!
+    au FileType tex setlocal spell
+    au FileType txt setlocal spell
+    au FileType md setlocal spell
+augroup END
