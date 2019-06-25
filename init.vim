@@ -543,5 +543,4 @@ augroup autoSpell
     au!
     au FileType tex setlocal spell
     au FileType text setlocal spell
-    au FileType markdown setlocal spell
 augroup END
