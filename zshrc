@@ -36,6 +36,7 @@ if type exa > /dev/null
 then 
 	unalias ls
 	alias ls="exa -lhgbHm --git "
+	alias lst="exa -lhgbHmT --git"
 fi
 
 #ZSH Style and Options
