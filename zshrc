@@ -20,7 +20,7 @@ alias more="less -r"
 alias sudo="sudo "
 alias rsync="rsync -Pva"
 alias neofetch="clear; neofetch"
-alias -g sd="/home/tom/ScratchArea/"
+alias -g sd="/home/tom/.ScratchArea/"
 alias matrix="cmatrix"
 alias reboot="sudo reboot"
 alias poweroff="sudo poweroff"
@@ -30,6 +30,7 @@ alias makepkg="makepkg -i"
 alias cl="clear"
 alias free="free -h"
 alias xclip="xclip -selection clipboard"
+alias vwd="nautilus ."
 
 
 if type exa > /dev/null
