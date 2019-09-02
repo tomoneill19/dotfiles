@@ -367,39 +367,13 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-unimpaired'
 
-Plug 'ncm2/ncm2'
-
-Plug 'roxma/nvim-yarp'
-
-Plug 'ncm2/ncm2-tmux' "Tmux
-
-Plug 'ncm2/ncm2-bufword' "Current Buffer
-
-Plug 'ncm2/ncm2-jedi' "Python
-
-Plug 'ncm2/ncm2-path' "Paths
-
 Plug 'wellle/tmux-complete.vim' "From other tmux panes
-
-Plug 'ncm2/ncm2-pyclang' "C/C++
 
 Plug 'lervag/vimtex' "Latex
 
-Plug 'ncm2/ncm2-vim' "Vimscript
-
 Plug 'Shougo/neco-vim'
 
-Plug 'ObserverOfTime/ncm2-jc2' "Java
-
 Plug 'artur-shaik/vim-javacomplete2'
-
-Plug 'ncm2/ncm2-markdown-subscope' "Markdown subscopes
-
-Plug 'ncm2/ncm2-racer' "Rust
-
-Plug 'ncm2/ncm2-ultisnips' "Snippets
-
-Plug 'SirVer/ultisnips'
 
 Plug 'Chiel92/vim-autoformat'
 
@@ -437,7 +411,6 @@ let g:airline#extensions#ale#enabled = 1
 
 " Autocomplete Config
 set completeopt=noinsert,menuone
-au BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 inoremap <c-c> <ESC>
 inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
