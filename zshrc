@@ -36,8 +36,8 @@ alias vwd="nautilus ."
 if type exa > /dev/null
 then 
 	unalias ls
-	alias ls="exa -lhgbHm --git "
-	alias lst="exa -lhgbHmT --git"
+	alias ls="exa -lhbHm --git "
+	alias lst="exa -lhbHmT --git"
 fi
 
 #ZSH Style and Options
