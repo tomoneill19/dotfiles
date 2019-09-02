@@ -30,7 +30,7 @@ alias makepkg="makepkg -i"
 alias cl="clear"
 alias free="free -h"
 alias xclip="xclip -selection clipboard"
-alias vwd="nautilus ."
+alias vwd="dolphin ."
 
 
 if type exa > /dev/null
