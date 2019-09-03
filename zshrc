@@ -103,7 +103,7 @@ fi
 #Variables
 export VISUAL="nvim"
 export EDITOR="nvim"
-export GOPATH="~/.go"
+export GOPATH="$HOME/.go"
 
 eval $(ssh-agent) > /dev/null
 
