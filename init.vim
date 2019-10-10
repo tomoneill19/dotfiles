@@ -1,5 +1,44 @@
+"""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+Plug 'junegunn/fzf'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Shougo/denite.nvim'
+Plug 'chrisbra/csv.vim'
+Plug 'mhinz/vim-signify'
+Plug 'lervag/vimtex'
+Plug 'Townk/vim-autoclose'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'mattn/emmet-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'roxma/nvim-yarp'
+Plug 'wellle/tmux-complete.vim'
+Plug 'lervag/vimtex'
+Plug 'Shougo/neco-vim'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Chiel92/vim-autoformat'
+Plug 'majutsushi/tagbar'
+Plug '907th/vim-auto-save'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'dylanaraps/wal.vim'
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-git'
+
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""
 " General
-"
+"""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -10,29 +49,28 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Colorscheme
+try
+    colorscheme wal
+catch  /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+endtry
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
 
-" Fast saving
-nmap <leader>w :w!<cr>
-
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
+" :Q mapped to :q
+command Q q
 
 " VIM user interface
-"
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en'
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
@@ -45,7 +83,7 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-"Always show current position
+" Always show current position
 set ruler
 
 " Height of the command bar
@@ -96,9 +134,6 @@ endif
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-
-" Colors and Fonts
-"
 " Enable syntax highlighting
 syntax enable
 
@@ -106,11 +141,6 @@ syntax enable
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
-
-try
-    colorscheme desert
-catch
-endtry
 
 set background=dark
 
@@ -122,23 +152,17 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-" Set utf8 as standard encoding and en_US as the standard language
+" Set utf8 as standard encoding
 set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-
-" Files, backups and undo
-"
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in git etc anyway...
 set nobackup
 set nowb
 set noswapfile
 
-
-"Text, tab and indent
-"
 " Use spaces instead of tabs
 set expandtab
 
@@ -153,67 +177,9 @@ set tabstop=4
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-
-" Visual mode related
-
-" Visual mode alt + arrow keys to move blocks
-nnoremap <A-Up> :m-2<CR>
-nnoremap <A-Down> :m+<CR>
-inoremap <A-Up> :m-2<CR>
-inoremap <A-Down> :m+<CR>
-
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
-
-" Moving around, tabs, windows and buffers
-"
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
-
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+set ai
+set si
+set wrap
 
 " Specify the behavior when switching between buffers
 try
@@ -226,33 +192,9 @@ endtry
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-" Status line
-"
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
-
-
-" Editing mappings
-"
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-    nmap <D-j> <M-j>
-    nmap <D-k> <M-k>
-    vmap <D-j> <M-j>
-    vmap <D-k> <M-k>
-endif
-
+"""""""""""""""""""""""""""""""""""""""
+" Helper functions
+"""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -266,36 +208,6 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
-
-" Spell checking
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
-
-" Misc
-"
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -327,112 +239,144 @@ endfunction
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" Plugins
-" 
-call plug#begin()
-Plug 'autozimu/LanguageClient-neovim', {
-            \ 'branch': 'next',
-            \ 'do': 'bash install.sh',
-            \ }
+"""""""""""""""""""""""""""""""""""""""
+" Misc Maps
+"""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <F3> :Autoformat<CR>
+nnoremap <F4> :TagbarToggle<cr>
+nnoremap <F5> :UndotreeToggle<cr>:UndotreeFocus<cr>
+noremap q: <NOP>
+noremap q/ <NOP>
+noremap q? <NOP>
+noremap K <NOP>
+noremap <F1> <NOP>
+noremap ¬¬ ZZ
 
-Plug 'junegunn/fzf'
+" Make s act like d but it doesn't cut the text to a register
+nnoremap s "_d
+nnoremap ss "_dd
+nnoremap S "_D
 
-Plug 'w0rp/ale'
+" Make j and k move by wrapped line, apart from when it'd break things
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-Plug 'vim-airline/vim-airline'
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-Plug 'vim-airline/vim-airline-themes'
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
 
-Plug 'Shougo/denite.nvim'
+" Move a line of text using CTRL+ALT+[j/k]
+nmap <c-m-j> mz:m+<cr>`z
+nmap <c-m-k> mz:m-2<cr>`z
+vmap <c-m-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <c-m-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-Plug 'chrisbra/csv.vim'
+" Remap VIM 0 to first non-blank character
+map 0 ^
 
-Plug 'mhinz/vim-signify'
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
-Plug 'lervag/vimtex'
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
 
-Plug 'Townk/vim-autoclose'
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
 
-Plug 'artur-shaik/vim-javacomplete2'
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
 
-Plug 'godlygeek/tabular'
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
-Plug 'plasticboy/vim-markdown'
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-Plug 'mattn/emmet-vim'
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
 
-Plug 'sheerun/vim-polyglot'
+" Move between buffers
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
 
-Plug 'tpope/vim-fugitive'
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
-Plug 'tpope/vim-unimpaired'
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
-Plug 'wellle/tmux-complete.vim' "From other tmux panes
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-Plug 'lervag/vimtex' "Latex
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-Plug 'Shougo/neco-vim'
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-Plug 'artur-shaik/vim-javacomplete2'
+" Fast saving
+nmap <leader>w :w!<cr>
 
-Plug 'Chiel92/vim-autoformat'
+"""""""""""""""""""""""""""""""""""""""
+" Misc Sets
+"""""""""""""""""""""""""""""""""""""""
+" Spelllang English
+set spelllang=en_gb
 
-Plug 'majutsushi/tagbar'
+" Enable neovim's inccommand feature
+set inccommand=nosplit
 
-Plug '907th/vim-auto-save'
+" Set spellcheck on for *.tex files
+au FileType tex setlocal spell
 
-Plug 'francoiscabrol/ranger.vim'
+" Autosave
+let g:auto_save = 0
+augroup ft_latex
+    au!
+    au FileType tex let b:auto_save = 1
+augroup END
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
 
-Plug 'rbgrouleff/bclose.vim'
+
+"""""""""""""""""""""""""""""""""""""""
+" Plugin Options
+"""""""""""""""""""""""""""""""""""""""
+" Polyglot
+let g:polyglot_disabled = ['py', 'markdown', 'latex'] " Disable polyglot for everything it will conflict on
 
 
-call plug#end()
-
-" Plugin Configs
-"
-" Linter Config
-let g:ale_linters = {
-            \ 'sh': ['language_server'],
-            \ 'c': ['gcc'],
-            \ 'py': ['pylint']
-            \ }
-let g:ale_python_pylint_options = "--errors-only"
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = "XX"
-let g:ale_sign_warning = "!!"
-let g:ale_lint_on_text_changed = 'never'
-let g:polyglot_disabled = ['py', 'markdown', 'latex'] " Disable polyglot for everything it will conflict with ale on (expand me!)
-
-" Airline Config
+" Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='badwolf'
 let g:airline#extensions#ale#enabled = 1
 
-" Autocomplete Config
-set completeopt=noinsert,menuone
-set shortmess+=c
-inoremap <c-c> <ESC>
-inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
-inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-inoremap <expr> <S-Tab> (pumvisible() ? "\<C-p>" : "\<S-Tab>")
-au FileType java setlocal omnifunc=javacomplete#Complete
-augroup NCM2
-    au!
-    " some other settings...
-    " uncomment this block if you use vimtex for LaTex
-    au Filetype tex call ncm2#register_source({
-                \ 'name': 'vimtex',
-                \ 'priority': 8,
-                \ 'scope': ['tex'],
-                \ 'mark': 'tex',
-                \ 'word_pattern': '\w+',
-                \ 'complete_pattern': g:vimtex#re#ncm2,
-                \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                \ })
-augroup END
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-" vim-markdown Config
+" Coc.nvim
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+" Vim-markdown
 let g:vim_markdown_folding_disabled = 1
 set conceallevel=2
 let g:tex_conceal = ""
@@ -440,7 +384,7 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_strikethrough = 1
 filetype plugin on
 
-" vimtex config
+" Vimtex
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
@@ -469,51 +413,13 @@ let g:Tex_IgnoredWarnings =
             \'Double space found.'."\n"
 let g:Tex_IgnoreLevel = 8
 
-" LanguageClient Options
-let g:LanguageClient_serverCommands = {
-            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-            \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-            \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-            \ 'python': ['/usr/local/bin/pyls'],
-            \ }
-let g:LanguageClient_useVirtualText = 0
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-" Autoformat options
-let g:formatdef_my_custom_c = '"astyle --mode=c -A2 -F -xg -H -U -xe -k1 -W1 -xb -xf -xh -c -xp -p 2>/dev/null"'
-let g:formatdef_my_custom_java = '"astyle --mode=java -A2 -F -xg -H -U -xe -k1 -W3 -xb -xf -xh -c -xp -p 2>/dev/null"'
+" Autoformat
+let g:formatdef_my_custom_c = '"astyle --mode=c -A2 -F -xg -H -U -xe -k1 -W1 -xb -xf -xh -c -xp -p -C -S -N 2>/dev/null"'
+let g:formatdef_my_custom_java = '"astyle --mode=java -A2 -F -xg -H -U -xe -k1 -W3 -xb -xf -xh -c -xp -p -C -S -N 2>/dev/null"'
 let g:formatters_c = ['my_custom_c']
 let g:formatters_cpp = ['my_custom_c']
 let g:formatters_java = ['my_custom_java']
 
-" Autosave options
-let g:auto_save = 0
-augroup ft_latex
-    au!
-    au FileType tex let b:auto_save = 1
-augroup END
-let g:auto_save_events = ["InsertLeave", "TextChanged"]
-
-" ranger.vim options
+" Ranger.vim
 "let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
-
-" Haskell syntax highlighting 
-let g:ale_haskell_ghc_options = "-fno-code -v0 -dynamic"
-
-" Keybinds
-nnoremap <silent> <F3> :Autoformat<CR>
-nnoremap <F4> :TagbarToggle<cr>
-
-" Spellcheck Language"
-set spelllang=en_gb
-
-augroup autoSpell
-    au!
-    au FileType tex setlocal spell
-    au FileType text setlocal spell
-augroup END
