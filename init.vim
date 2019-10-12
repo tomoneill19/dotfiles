@@ -33,6 +33,8 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-git'
 
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 call plug#end()
 
 
