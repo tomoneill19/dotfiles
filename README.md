@@ -6,4 +6,4 @@
 * Clone to a folder in which to edit your dotfiles
 * Run setup.py and say yes to any files you want to install
     * Creates relevent symlinks for editing the files automatically
-    * Install it the once and then you can just pull over the top with newer veversions
+    * Install it the once and then you can just pull over the top with newer versions
