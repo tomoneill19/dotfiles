@@ -265,6 +265,12 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" Move a line of text using CTRL+ALT+[Up/Down]
+nmap <c-m-down> mz:m+<cr>`z
+nmap <c-m-up> mz:m-2<cr>`z
+vmap <c-m-down> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <c-m-up> :m'<-2<cr>`>my`<mzgv`yo`z
+
 " Move a line of text using CTRL+ALT+[j/k]
 nmap <c-m-j> mz:m+<cr>`z
 nmap <c-m-k> mz:m-2<cr>`z
