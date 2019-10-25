@@ -52,11 +52,7 @@ filetype indent on
 set autoread
 
 " Colorscheme
-try
-    colorscheme wal
-catch  /^Vim\%((\a\+)\)\=:E185/
-    colorscheme desert
-endtry
+colorscheme desert
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
