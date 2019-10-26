@@ -32,12 +32,29 @@ alias free="free -h"
 alias xclip="xclip -selection clipboard"
 alias vwd="dolphin ."
 
-
+# Conditional Aliases
 if type exa > /dev/null
-then 
-	unalias ls
-	alias ls="exa -lhbHm --git "
-	alias lst="exa -lhbHmT --git"
+then
+    alias ls="exa -lhbHm --git "
+    alias lst="exa -lhbHmT --git"
+fi
+if type nvim > /dev/null
+then
+    alias vi="nvim"
+    alias vim="nvim"
+    export EDITOR=nvim
+    export VISUAL=nvim
+elif type vim > /dev/null
+then
+    alias vi="vim"
+    alias nvim="vim"
+    export EDITOR=vim
+    export VISUAL=vim
+else
+    alias vim="vi"
+    alias nvim="vi"
+    export EDITOR=vi
+    export VISUAL=vi
 fi
 
 #ZSH Style and Options
