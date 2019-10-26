@@ -5,9 +5,6 @@ compinit
 promptinit
 
 #Aliases
-alias vi="nvim"
-alias vim="nvim"
-alias ls="ls -lh --color"
 alias rm="rm -rfv"
 alias cp="cp -av --reflink=auto"
 alias mv="mv -v"
@@ -37,11 +34,13 @@ if type exa > /dev/null
 then
     alias ls="exa -lhbHm --git "
     alias lst="exa -lhbHmT --git"
+else
+    alias ls="ls -lh --color"
 fi
 if type nvim > /dev/null
 then
-    alias vi="nvim"
     alias vim="nvim"
+    alias vi="nvim"
     export EDITOR=nvim
     export VISUAL=nvim
 elif type vim > /dev/null
@@ -67,8 +66,8 @@ prompt walters
 #Functions
 mkcdir () {
     mkdir -p -- "$1" &&
-    cd -P -- "$1"
-}
+        cd -P -- "$1"
+    }
 
 reload-zshrc () {
 source ~/.zshrc
@@ -81,18 +80,18 @@ lls () {
 
 
 sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    if [[ $BUFFER == sudo\ * ]]; then
-        LBUFFER="${LBUFFER#sudo }"
-    elif [[ $BUFFER == $EDITOR\ * ]]; then
-        LBUFFER="${LBUFFER#$EDITOR }"
-        LBUFFER="sudoedit $LBUFFER"
-    elif [[ $BUFFER == sudoedit\ * ]]; then
-        LBUFFER="${LBUFFER#sudoedit }"
-        LBUFFER="$EDITOR $LBUFFER"
-    else
-        LBUFFER="sudo $LBUFFER"
-    fi
+[[ -z $BUFFER ]] && zle up-history
+if [[ $BUFFER == sudo\ * ]]; then
+    LBUFFER="${LBUFFER#sudo }"
+elif [[ $BUFFER == $EDITOR\ * ]]; then
+    LBUFFER="${LBUFFER#$EDITOR }"
+    LBUFFER="sudoedit $LBUFFER"
+elif [[ $BUFFER == sudoedit\ * ]]; then
+    LBUFFER="${LBUFFER#sudoedit }"
+    LBUFFER="$EDITOR $LBUFFER"
+else
+    LBUFFER="sudo $LBUFFER"
+fi
 }
 zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
@@ -100,9 +99,9 @@ bindkey -M vicmd '\e\e' sudo-command-line
 
 #Sourcing
 if [ -d /etc/zsh/zshrc.d ]; then
-  for file in /etc/zsh/zshrc.d/*; do
-    source $file
-  done
+    for file in /etc/zsh/zshrc.d/*; do
+        source $file
+    done
 fi
 
 if [ -d "$HOME/.bin" ] ; then
@@ -126,11 +125,11 @@ eval $(ssh-agent) > /dev/null
 
 #Alias expansion
 globalias() {
-   if [[ $LBUFFER =~ ' [A-Za-z0-9]+$' ]]; then
-     zle _expand_alias
-     zle expand-word
-   fi
-   zle self-insert
+    if [[ $LBUFFER =~ ' [A-Za-z0-9]+$' ]]; then
+        zle _expand_alias
+        zle expand-word
+    fi
+    zle self-insert
 }
 
 zle -N globalias
