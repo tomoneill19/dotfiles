@@ -296,6 +296,9 @@ map <c-space> ?
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
+" Make curly brackets nice
+inoremap {<cr> {<cr>}<c-o><s-o>
+
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
