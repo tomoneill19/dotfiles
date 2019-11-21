@@ -117,8 +117,6 @@ if [ -d "/ubin" ] ; then
 fi
 
 #Variables
-export VISUAL="nvim"
-export EDITOR="nvim"
 export GOPATH="$HOME/.go"
 
 eval $(ssh-agent) > /dev/null
