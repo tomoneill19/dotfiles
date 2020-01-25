@@ -30,7 +30,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

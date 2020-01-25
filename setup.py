@@ -35,6 +35,9 @@ if yes or ("n" not in input("Install zsh configs? (Y/n) ").lower()):
     print("Installed zshrc")
     link("/zsh-plugins", "~/.zsh")
     print("Installed .zsh folder")
+    if not os.path.isdir("~/.resh"):
+        os.system("curl -fsSL https://raw.githubusercontent.com/curusarn/resh/master/scripts/rawinstall.sh | bash")
+        print("Installed resh")
 
 if yes or ("n" not in input("Install nvim configs? (Y/n) ").lower()):
     pikaur(["neovim-nightly", "vim-plug", "neovim-symlinks", "nodejs", "texlive-bin", "latex-mk", "ccls"])

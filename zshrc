@@ -198,3 +198,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000000
 SAVEHIST=10000
 setopt SHARE_HISTORY
+
+[ -f ~/.resh/shellrc ] && source ~/.resh/shellrc
+
