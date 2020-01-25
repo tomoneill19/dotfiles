@@ -3,25 +3,18 @@
 """""""""""""""""""""""""""""""""""""""
 call plug#begin()
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Shougo/denite.nvim'
 Plug 'chrisbra/csv.vim'
-Plug 'mhinz/vim-signify'
 Plug 'lervag/vimtex'
 Plug 'Townk/vim-autoclose'
-Plug 'artur-shaik/vim-javacomplete2'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
-Plug 'roxma/nvim-yarp'
-Plug 'wellle/tmux-complete.vim'
-Plug 'lervag/vimtex'
-Plug 'Shougo/neco-vim'
-Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Chiel92/vim-autoformat'
 Plug 'majutsushi/tagbar'
 Plug '907th/vim-auto-save'
@@ -32,8 +25,14 @@ Plug 'dylanaraps/wal.vim'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-git'
+Plug 'neoclide/coc-neco'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ludovicchabant/vim-gutentags'
 
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -431,5 +430,19 @@ let g:formatters_cpp = ['my_custom_c']
 let g:formatters_java = ['my_custom_java']
 
 " Ranger.vim
-"let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
+
+""" NERDTree
+let g:NERDTreeIndicatorMapCustom = {
+            \ "Modified"  : "M",
+            \ "Staged"    : "+",
+            \ "Untracked" : "N",
+            \ "Renamed"   : "R",
+            \ "Unmerged"  : "=",
+            \ "Deleted"   : "D",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ 'Ignored'   : 'i',
+            \ "Unknown"   : "?"
+            \ }
+
