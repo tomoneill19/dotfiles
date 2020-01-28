@@ -50,7 +50,7 @@ filetype indent on
 set autoread
 
 " Colorscheme
-colorscheme desert
+colorscheme koehler
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
